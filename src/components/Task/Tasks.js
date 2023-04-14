@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Typography,Card,Progress } from 'antd';
 
+const { Title } = Typography;
 const backendurl = "http://localhost:8080";
 
 export default function Tasks() {
@@ -9,27 +11,33 @@ export default function Tasks() {
   useEffect(() => {
     axios.get(backendurl+"/task/all-tasks")
       .then(response => {setTasks(response.data.data);
-      //console.log(response);
     });
   }, []);
 
   const listItems = tasks.map(task =>
-    <li key={task.tid}>
-      <p>
-             {"Task Name: "+task.tname}<br/>
-            {"Status: "+task.lateststatus}<br/>
-            {"Owner: "+task.ownerid}<br/>
-             {"Start: "+task.starttime}<br/>
-             {"Due: "+task.due}<br/>
-             {"Information: "+task.taskinfo}<br/>
+      <Card title={task.tname}>
+        {(task.lateststatus==0)&&<Progress percent={0}/>}
+        {(task.lateststatus==1)&&<Progress percent={50}/>}
+        {(task.lateststatus==2)&&<Progress percent={50} status="exception"/>}
+        {(task.lateststatus==3)&&<Progress percent={100}/>}
+      <p><span style={{ fontWeight: "bold" }}>Status: </span>
+      {(task.lateststatus==0)&&"Created"}
+      {(task.lateststatus==1)&&"On Progress"}
+      {(task.lateststatus==2)&&"On Hold"}
+      {(task.lateststatus==3)&&"Completed"}
       </p>
-    </li>
+      <p><span style={{ fontWeight: "bold" }}>Owner ID: </span>{task.ownerid}</p>
+      <p><span style={{ fontWeight: "bold" }}>Start: </span>{task.starttime}</p>
+      <p><span style={{ fontWeight: "bold" }}>Due: </span>{task.due}</p>
+      <p><span style={{ fontWeight: "bold" }}>Information: </span>{task.taskinfo}</p>
+
+    </Card>
   );
 
   return(
-    <article>
-      <h1>All Tasks</h1>
-      <ul>{listItems}</ul>
-    </article>
+    <div>
+      <Title level={2}>All Tasks</Title>
+      {listItems}
+    </div>
   );
 }
