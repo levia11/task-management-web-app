@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Typography,Card,Button,Progress } from 'antd';
+import { Typography, Card, Button, Progress } from 'antd';
 
 const { Title } = Typography;
 const backendurl = "http://localhost:8080";
@@ -59,23 +59,23 @@ export default function UpdateTask() {
 
   const listItems = tasks.map(task =>
     <Card title={task.tname}>
-      {(task.lateststatus==0)&&<Progress percent={0}/>}
-        {(task.lateststatus==1)&&<Progress percent={50}/>}
-        {(task.lateststatus==2)&&<Progress percent={50} status="exception"/>}
-        {(task.lateststatus==3)&&<Progress percent={100}/>}
-      <p>
+      {(task.lateststatus == 0) && <Progress percent={0} />}
+      {(task.lateststatus == 1) && <Progress percent={50} />}
+      {(task.lateststatus == 2) && <Progress percent={50} status="exception" />}
+      {(task.lateststatus == 3) && <Progress percent={100} />}
+
       <form onSubmit={e => handleSubmit(e, task)}>
-      <p><span style={{ fontWeight: "bold" }}>Status: </span>
-      {(task.lateststatus==0)&&"Created"}
-      {(task.lateststatus==1)&&"On Progress"}
-      {(task.lateststatus==2)&&"On Hold"}
-      {(task.lateststatus==3)&&"Completed"}
-      </p>
-      <p><span style={{ fontWeight: "bold" }}>Start: </span>{task.starttime}</p>
-      <p><span style={{ fontWeight: "bold" }}>Due: </span>{task.due}</p>
-      <p><span style={{ fontWeight: "bold" }}>Information: </span>{task.taskinfo}</p>
+        <p><span style={{ fontWeight: "bold" }}>Status: </span>
+          {(task.lateststatus == 0) && "Created"}
+          {(task.lateststatus == 1) && "On Progress"}
+          {(task.lateststatus == 2) && "On Hold"}
+          {(task.lateststatus == 3) && "Completed"}
+        </p>
+        <p><span style={{ fontWeight: "bold" }}>Start: </span>{task.starttime}</p>
+        <p><span style={{ fontWeight: "bold" }}>Due: </span>{task.due}</p>
+        <p><span style={{ fontWeight: "bold" }}>Information: </span>{task.taskinfo}</p>
         <p>
-        <span style={{ fontWeight: "bold" }}>New Status: </span>
+          <span style={{ fontWeight: "bold" }}>New Status: </span>
           <label>
             <input type="radio"
               name="lateststatus" value="1"
@@ -99,10 +99,10 @@ export default function UpdateTask() {
           </label>
         </p>
         <Button type="primary" htmlType="submit">
-        Update Status
-      </Button>
+          Update Status
+        </Button>
       </form>
-</p>
+      <br />
       <div>
         <Button onClick={e => Delete(task.tid)} danger>Delete</Button>
       </div>

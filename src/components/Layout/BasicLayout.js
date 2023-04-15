@@ -7,7 +7,8 @@ import NewTask from '../Task/NewTask';
 import UpdateTask from '../Task/UpdateTask';
 import MyTasks from '../Task/MyTask';
 import UserInfo from '../User/UserInfo';
-import "./BasicLayout.css"
+import "./BasicLayout.css";
+import Users from '../User/Users';
 
 const { Header, Content, Sider,Footer } = Layout;
 const items2 = [
@@ -28,8 +29,14 @@ const items2 = [
     ]
     },
     {
-        key:"userinfo",label:"User Info",icon: React.createElement(UserOutlined),
-    }
+      key:"user",label:"User",icon: React.createElement(UserOutlined),
+      children:[
+        {
+            key:"all-users",label:"Group Members"
+        },{
+        key:"userinfo",label:"User Info"
+    }]
+  }
 ]
 
 
@@ -43,6 +50,7 @@ const BasicLayout = () => {
         case "new-task":setComp(<NewTask/>); break;
         case "update-task":setComp(<UpdateTask/>); break;
         case "userinfo":setComp(<UserInfo/>);break;
+        case "all-users":setComp(<Users/>);break;
     }
 };
     const uname =JSON.parse(sessionStorage.getItem("token")).uname;

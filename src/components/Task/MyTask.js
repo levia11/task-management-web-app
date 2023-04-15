@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Typography, Card,Progress } from 'antd';
+import { Typography, Card,Progress,Tag } from 'antd';
+import moment from "moment";
 
 const { Title } = Typography;
 const backendurl = "http://localhost:8080";
@@ -13,7 +14,9 @@ export default function MyTasks() {
     axios.post(backendurl + "/task/my-tasks", "ownerid=" + ownerid)
       .then(response => {
         setTasks(response.data.data);
-        console.log(response);
+        // console.log(Date.parse(response.data.data[2].due));
+        // console.log(moment().format('x'));
+        // console.log(Date.parse(response.data.data[2].due)-moment().format('x'));
       });
   }, []);
 
@@ -30,11 +33,12 @@ export default function MyTasks() {
       {(task.lateststatus==3)&&"Completed"}
       </p>
       <p><span style={{ fontWeight: "bold" }}>Start: </span>{task.starttime}</p>
-      <p><span style={{ fontWeight: "bold" }}>Due: </span>{task.due}</p>
+      <p><span style={{ fontWeight: "bold" }}>Due: </span>
+      {((Date.parse(task.due)-moment().format('x')<=604800000)&&(task.lateststatus!=3))&&<Tag color="red">!</Tag>}
+      {task.due}</p>
       <p><span style={{ fontWeight: "bold" }}>Information: </span>{task.taskinfo}</p>
-
+      
     </Card>
-    
   );
 
   return (

@@ -11,6 +11,8 @@ export default function Tasks() {
   useEffect(() => {
     axios.get(backendurl+"/task/all-tasks")
       .then(response => {setTasks(response.data.data);
+        //console.log(response.data.data.length);
+        
     });
   }, []);
 
