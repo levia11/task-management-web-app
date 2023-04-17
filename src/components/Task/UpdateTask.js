@@ -12,7 +12,7 @@ export default function UpdateTask() {
   const Delete = async (taskid) => {
     console.log(taskid);
     axios.post(backendurl + "/task/delete-task", "tid=" + taskid).then((response) => {
-      //this.forceUpdate();
+      window.location.reload();
     })
       .catch((error) => {
         console.log(error);

@@ -19,7 +19,6 @@ export default function Login({ setToken }) {
       contact,
       password,
     }).then((response) => {
-
       const token = JSON.stringify(response.data.data);
 
       sessionStorage.setItem("token", token);
@@ -62,7 +61,7 @@ export default function Login({ setToken }) {
     </Form.Item>
     <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
       <Button type="primary" htmlType="submit">
-        Submit
+        Login
       </Button>
     </Form.Item>
       </Form>

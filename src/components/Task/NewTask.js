@@ -24,7 +24,8 @@ export default function NewTask() {
       taskinfo,
       tname
     }).then((response) => {
-      if (response.data.code == 0) { setSuccess(1); }
+      //onsole.log(response.data.code===0);
+      if (response.data.code === "0") { setSuccess(1); }
       else { setSuccess(2); }
     })
       .catch((error) => {
@@ -36,7 +37,7 @@ export default function NewTask() {
     <div>
       <Title level={2}>Create a New Task</Title>
       <form onSubmit={handleSubmit}>
-        <p>
+        <span>
           <label>
             <p style={{fontWeight:"bold"}}>Task Name</p>
             <Input onChange={e => setTname(e.target.value)} required />
@@ -54,7 +55,8 @@ export default function NewTask() {
             {/* <input type="text" onChange={e => setTaskInfo(e.target.value)} /> */}
             <TextArea onChange={e => setTaskInfo(e.target.value)} />
           </label>
-        </p>
+        </span>
+        <p></p>
         <div>
           <Button type="primary" htmlType="submit">
             Submit
@@ -62,8 +64,8 @@ export default function NewTask() {
         </div>
       </form>
       <div>
-        {(success == 1) && <Alert message="Success! " type="success" style={{ margin: '15px' }} />}
-        {(success == 2) && <Alert message="Task name exists! " type="error" style={{ margin: '15px' }} />}
+        {(success === 1) && <Alert message="Success! " type="success" style={{ margin: '15px' }} />}
+        {(success === 2) && <Alert message="Task name exists! " type="error" style={{ margin: '15px' }} />}
       </div>
     </div>
   )

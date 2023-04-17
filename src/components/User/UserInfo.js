@@ -17,12 +17,12 @@ export default function UserInfo() {
   useEffect(() => {
     axios.post(backendurl+"/user/user-info","uid="+ownerid)
       .then(response => {
-        console.log(response.data);
-    setUname(response.data.uname);
-    setContact(response.data.contact);
-    setTid(response.data.tid);
-    setUid(response.data.uid)
-      console.log(response);
+        //console.log(response.data);
+    setUname(response.data.data.uname);
+    setContact(response.data.data.contact);
+    setTid(response.data.data.tid);
+    setUid(response.data.data.uid)
+      //console.log(response);
     });
   }, []);
 
